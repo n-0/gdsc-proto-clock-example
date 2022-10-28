@@ -1,0 +1,29 @@
+syntax = "proto3";
+package clock;
+import "action.proto";
+
+message Empty {}
+
+message Time {
+  int64 unix = 1;
+  string for_humans = 2;
+}
+
+message Waiting {
+  repeated string text_for_you = 1;
+  Time time_left = 2;
+}
+
+/**
+  * A digital verison of a clock..
+  * One can check the time with a quick look
+  * or stare continously await a certain point in time
+  */
+service Clock {
+  // stare at the clock
+  rpc wait_until(Time) returns (stream Waiting) {}
+  // check the time
+  rpc quick_look(Empty) returns (Time) {}
+  // hold your breath 
+  rpc stop_watch(stream action.Action) returns (Empty) {}
+}

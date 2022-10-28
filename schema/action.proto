@@ -1,0 +1,14 @@
+syntax = "proto3";
+package action;
+
+enum ActionState {
+  Start = 0;
+  Stop = 1;
+  End = 2;
+  Continue = 3;
+}
+
+message Action {
+  uint64 id = 1;
+  ActionState state = 2;
+}
